@@ -1,0 +1,147 @@
+@font-face {
+  font-family: 'MonoplexKR-Regular';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_Monoplex-kr@1.0/MonoplexKR-Regular.woff2') format('woff2');
+  font-style: normal;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'MonoplexKR-Regular';
+    }
+    
+    /* 스크롤바 스타일 */
+    ::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #888;
+      border-radius: 10px;
+    }
+    
+    
+    .split-container {
+      display: flex;
+      height: 100vh;
+    }
+
+    .menu-icon {
+      margin-bottom: 4rem;
+    }
+    
+    .menu {
+      width: 50vw;
+      height: 100vh;
+      overflow-y: auto;
+      background: linear-gradient(0deg, rgba(255,255,255,1) 10%, rgba(171,171,171,1) 100%);
+      color: #fff;
+      padding: 2rem;
+      box-sizing: border-box;
+    }
+    
+    .menu h1 {
+      font-size: 2rem;
+      text-align: center;
+      margin-top: 0;
+      margin-bottom: 2rem;
+    }
+    
+    .menu ul {
+      list-style: none;
+      padding: 0;
+      margin-top: 4rem;
+    }
+    
+    .menu li {
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      cursor: pointer;
+      
+    }
+    
+    .menu li:last-of-type {
+      margin-bottom: 0;
+    }
+    
+    .content {
+      width: 50vw;
+      height: 100vh;
+      overflow-y: auto;
+      background: linear-gradient(180deg, rgba(255,255,255,1) 10%, rgba(171,171,171,1) 100%);
+      padding: 2rem;
+      box-sizing: border-box;
+    }
+    .section {
+      margin-bottom: 4rem;
+    }
+    
+    .section:last-of-type {
+      margin-bottom: 0;
+    }
+    
+    .section h2 {
+      font-size: 2rem;
+      margin-top: 0;
+      margin-bottom: 3rem;
+    }
+    
+    .section p {
+      font-size: 1.18rem;
+      line-height: 2.3rem;
+      text-align: left;
+      word-break: keep-all;
+    }
+
+
+    p {
+      margin-block-end: 0;
+      margin-block-start: 0;
+          margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    }
+
+    .in {
+        text-indent: 2em;
+    }
+    
+    .hide {
+      display: none;
+    }
+
+    a {
+      text-decoration-line: none;
+      color: slategray;
+    }
+    a:visited {
+      color: slategray;
+    }
+
+    a:hover {
+      color: slateblue;
+    }
+
+
+    .hover-content {
+      padding: 10px;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.2);
+      box-sizing: border-box;
+      background-color: #fff;
+      max-width: 20rem;
+    }
+    
+    [data-hover-wrapper] {
+      transition: opacity .3s, transform .3s;
+    }
+    
+    .hover-content > p {
+      font-size: 0.875rem;
+      margin: 0;
+      line-height: 1.4;
+    }
