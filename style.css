@@ -1,34 +1,41 @@
+@font-face {
+  font-family: 'Ycomputer-Regular';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/Ycomputer-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
 .dust {
   position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: transform 0.3s ease-out;
 }
 
 .dust img {
-  width: 45px;
+  width: 25px;
 }
 
 .dust-content {
-  max-width: 35rem;
   display: none;
   border-style: none;
   position: absolute;
   left: -30px;
   width: max-content;
-  word-break: keep-all;
-  padding: 1rem;
-  font-family: 'MonoplexKR-Regular';
-  font-weight: 500;
+  max-width: 35rem;
   margin: 0;
+  padding: 1rem;
+  word-break: keep-all;
+  font-family: 'Ycomputer-Regular';
   line-height: 1.4;
   text-align: left;
   cursor: default;
-  z-index: 999;
 }
 
 .dust:hover .dust-content {
   display: block;
+  text-shadow: white 0px 0 3px;
 }
 .dust:hover > img {
   filter: brightness(0) blur(10px);
@@ -57,12 +64,12 @@
 
 #c5 {
   color: green;
-  font-size: 13px;
+  font-size: 15px;
 }
 
 #c6 {
   color: yellow;
-  font-size: 13px;
+  font-size: 15px;
 }
 
 #c7 {
@@ -92,12 +99,12 @@
 
 #c12 {
   color: salmon;
-  font-size: 11px;
+  font-size: 15px;
 }
 
 #c13 {
   color: aqua;
-  font-size: 11px;
+  font-size: 15px;
 }
 
 #c14 {
