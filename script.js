@@ -9,39 +9,124 @@ function moveDust(dust) {
   const maxY = window.innerHeight - dust.offsetHeight;
   let x = Math.floor(Math.random() * maxX);
   let y = Math.floor(Math.random() * maxY);
-  let speedX = Math.random() * 0.9 - 0.4;
-  let speedY = Math.random() * 0.9 - 0.5;
+  let speedX = Math.random() * 0.8 - 0.2;
+  let speedY = Math.random() * 0.8 - 0.2;
   let animationId;
 
   function animate() {
     x += speedX;
     y += speedY;
-    if (x > maxX || x < 0) {
+
+    x = Math.max(Math.min(x, maxX), 0);
+    y = Math.max(Math.min(y, maxY), 0);
+
+    // x, y 값이 화면 가장자리에 닿으면 방향을 반대로 변경합니다.
+    if (x <= 0 || x >= maxX) {
       speedX = -speedX;
     }
-    if (y > maxY || y < 0) {
+    if (y <= 0 || y >= maxY) {
       speedY = -speedY;
     }
-    dust.style.transform = `translate(${x}px, ${y}px)`;
+    const menu = document.querySelector('.menu ul');
+    if(menu.classList.contains('hide')) {
+      dust.style.transform = `translate(${x}px, ${y}px)`;
+    } else {
+      dust.style.transform = `translate(${x*0.49}px, ${y}px)`;
+    }
+
     animationId = requestAnimationFrame(animate);
+    document.body.style.overflow = '';
   }
+
   animate();
+
+  let isDragging = false;
+  let prevX, prevY;
 
   function stopDust() {
     cancelAnimationFrame(animationId);
-    dust.removeEventListener('click', stopDust);
-    dust.addEventListener('click', resumeDust);
+    document.body.style.overflow = 'hidden';
   }
 
-  function resumeDust() {
+  const toggleBtn = document.getElementById("toggle-btn");
+
+  if (toggleBtn) {
+    toggleBtn.addEventListener('change', () => {
+      if (toggleBtn.checked) {
+        stopDust();
+      } else {
+        animate();
+      }
+    });
+  } else {
+    console.error('toggle button not found');
+  } 
+
+  // dust가 마우스 드래그로 이동할 수 있도록 합니다.
+  dust.addEventListener('mousedown', (e) => {
+    e.preventDefault();
+    cancelAnimationFrame(animationId);
+    prevX = e.clientX;
+    prevY = e.clientY;
+    isDragging = true;
+  });
+
+  document.addEventListener('mousemove', onMouseMove);
+  document.addEventListener('mouseup', onMouseUp);
+
+  function onMouseMove(e) {
+    if (!isDragging) return;
+    x += e.clientX - prevX;
+    y += e.clientY - prevY;
+    x = Math.max(Math.min(x, maxX), 0);
+    y = Math.max(Math.min(y, maxY), 0);
+    prevX = e.clientX;
+    prevY = e.clientY;
+    dust.style.transform = `translate(${x}px, ${y}px)`;
+    cancelAnimationFrame(animationId);
+  }
+
+  function onMouseUp() {
+    if (!isDragging) return;
+    document.removeEventListener('mousemove', onMouseMove);
+    document.removeEventListener('mouseup', onMouseUp);
+    isDragging = false;
     animate();
-    dust.removeEventListener('click', resumeDust);
-    dust.addEventListener('click', stopDust);
   }
 
-  dust.addEventListener('click', stopDust);
 }
 
+const menuItems = document.querySelectorAll('.menu li');
+const sections = document.querySelectorAll('.section');
+
+menuItems.forEach(item => {
+  item.addEventListener('click', () => {
+    const section = document.querySelector(`#${item.dataset.section}`);
+    sections.forEach(section => section.classList.add('hide'));
+    section.classList.remove('hide');
+  });
+});
+
+function showContent() {
+  const menu = document.querySelector('.menu ul');
+  const sections = document.querySelectorAll('.section');
+  // toggle button을 화면에서 숨깁니다.
+  const toggleBtn = document.querySelectorAll('.switch');
+  
+
+  if (menu.classList.contains('hide')) {
+    sections.forEach(section => section.classList.remove('hide'));
+    toggleBtn.forEach(toggleBtn => toggleBtn.style.display = ' none');
+  } else {
+    sections.forEach(section => section.classList.add('hide'));
+    toggleBtn.forEach(toggleBtn => toggleBtn.style.display = 'block');
+  }
+  
+  menu.classList.toggle('hide');
+  sections.forEach(section => section.classList.add('hide'));
+  toggleBtn.style.display = 'block';
+
+}
 
 const links = document.getElementsByTagName("a");
 
@@ -81,8 +166,6 @@ function handleMouseOver(e) {
   document.body.append(wrapper);
   wrapper.setAttribute("style", handlePosition(e));
   
-  // You can remove this line when you are using. I had added for the demo.
-  if (document.querySelector('.info')) document.querySelector('.info').remove();
   
 }
 
